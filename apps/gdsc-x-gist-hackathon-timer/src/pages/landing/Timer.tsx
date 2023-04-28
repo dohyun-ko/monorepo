@@ -183,7 +183,7 @@ const Digit = styled.span`
   line-height: 1;
 `;
 
-const endTime = new Date("2023.04.30 05:30:00");
+const endTime = new Date("2023.04.30 14:30:00");
 
 const Timer = () => {
   const [hoursTensDelay, setHoursTensDelay] = useState(0);
