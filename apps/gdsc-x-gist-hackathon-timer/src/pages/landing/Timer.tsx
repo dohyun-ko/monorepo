@@ -3,7 +3,7 @@ import styled, {createGlobalStyle, css, keyframes} from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   body {
-    background: #111111;
+    background: #000000;
     margin: 0;
   }
 `;
@@ -66,15 +66,15 @@ const Wrapper = styled.div`
   &:before {
     top: 0;
     background-image: linear-gradient(to bottom,
-    rgba(17, 17, 17, 1) 0%,
-    rgba(17, 17, 17, 0) 100%);
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0) 100%);
   }
 
   &:after {
     bottom: 0;
     background-image: linear-gradient(to bottom,
-    rgba(17, 17, 17, 0) 0%,
-    rgba(17, 17, 17, 1) 100%);
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 1) 100%);
   }
 `;
 

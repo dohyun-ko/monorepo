@@ -7,7 +7,7 @@ import hackathonIllustration from "@/assets/images/hackathonIllustration.png";
 const GlobalStyle = createGlobalStyle`
   body {
     text-align: center;
-    background-color: #282c34;
+    background-color: #000000;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
