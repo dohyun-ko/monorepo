@@ -9,6 +9,7 @@ import Grid from "./containers/Grid";
 import Circle from "./figures/Circle";
 import Divider from "./figures/Divider";
 import Checkbox from "./inputs/Checkbox";
+import Highlight from "./texts/Highlight";
 import Input from "./inputs/Input";
 import Kebab from "./buttons/Kebab";
 import MaterialInput from "./inputs/MaterialInput";
@@ -23,17 +24,18 @@ import Text from "./texts/Text";
 import TextArea from "./inputs/TextArea";
 
 export {
-  Chip,
-  Button,
-  FilledButton,
   Area,
+  Button,
+  Checkbox,
+  Chip,
+  Circle,
   Content,
   ContentCard,
+  Divider,
+  FilledButton,
   Flex,
   Grid,
-  Circle,
-  Divider,
-  Checkbox,
+  Highlight,
   Input,
   Kebab,
   MaterialInput,
