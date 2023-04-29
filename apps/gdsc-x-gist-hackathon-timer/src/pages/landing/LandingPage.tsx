@@ -60,10 +60,12 @@ const LandingPage = () => {
           <Content width={"100%"}>
             <img src={isDarkMode ? hackathonTypographicDark : hackathonTypographicLight} alt={"hackathon typographic"}
                  width={"80%"}/>
-            <Text size={"48px"} weight={800} style={{
-              marginTop: "30px",
-              marginBottom: "-80px"
-            }}>
+            <Text size={"48px"} weight={800}
+                  color={isDarkMode ? "#FFFFFF" : "#000000"}
+                  style={{
+                    marginTop: "30px",
+                    marginBottom: "-80px"
+                  }}>
               Time Left:
             </Text>
             <Timer/>
