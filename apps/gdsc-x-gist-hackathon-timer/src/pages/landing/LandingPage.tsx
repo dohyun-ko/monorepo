@@ -1,8 +1,9 @@
 import React from "react";
-import {Area, Content, Highlight, Text} from "@common/components";
+import {Area, Content, Text} from "@common/components";
 import styled, {createGlobalStyle} from "styled-components";
 import Timer from "@/pages/landing/Timer";
 import hackathonIllustration from "@/assets/images/hackathonIllustration.png";
+import hackathonTypographic from "@/assets/images/hackathonTypographic.png";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -32,25 +33,12 @@ const LandingPage = () => {
       <AppHeader>
         <Area>
           <Content width={"100%"}>
-            <Text size={"60px"}
-                  textShadow={"-4px -4px 1px #FFF, 4px -4px 1px #FFF, -4px 4px 1px #FFF, 4px 4px 1px #FFF"}
-                  weight={900}
-                  letterSpacing={"4px"}
-            >
-              <Highlight color={"#E75F3E"}>G</Highlight>
-              <Highlight color={"#588AC5"}>D</Highlight>
-              <Highlight color={"#428E56"}>S</Highlight>
-              <Highlight color={"#F1C041"}>C</Highlight>
-              {" "}
-              <Highlight color={"#000000"}>X</Highlight>
-              {" "}
-              <Highlight color={"#C9503E"}>G</Highlight>
-              <Highlight color={"#737372"}>I</Highlight>
-              <Highlight color={"#737372"}>S</Highlight>
-              <Highlight color={"#737372"}>T</Highlight>
-            </Text>
-            <Text size={"36px"}>
-              Hackathon Timer
+            <img src={hackathonTypographic} alt={"hackathon typographic"} width={"80%"}/>
+            <Text size={"48px"} weight={800} style={{
+              marginTop: "30px",
+              marginBottom: "-80px"
+            }}>
+              Time Left:
             </Text>
             <Timer/>
             <img src={hackathonIllustration} alt={"hackathon illustration"} width={"90%"} style={{
