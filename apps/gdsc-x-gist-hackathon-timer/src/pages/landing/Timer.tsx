@@ -1,12 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import styled, {createGlobalStyle, css, keyframes} from 'styled-components';
-
-const GlobalStyle = createGlobalStyle`
-  body {
-    background: #000000;
-    margin: 0;
-  }
-`;
+import styled, {css, keyframes} from 'styled-components';
+import {useAtom} from "jotai";
+import {isDarkModeAtom} from "@/store";
 
 const animate = (count: number) => {
   let styles = '';
@@ -46,8 +41,11 @@ const secondsOnes = keyframes`
 ${animate(10)}
 `;
 
+interface WrapperProps {
+  isDarkMode: boolean;
+}
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<WrapperProps>`
   margin: 100px auto;
   width: 1000px;
   position: relative;
@@ -66,19 +64,23 @@ const Wrapper = styled.div`
   &:before {
     top: 0;
     background-image: linear-gradient(to bottom,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 0) 100%);
+    rgba(${({isDarkMode}) => isDarkMode ? `0, 0, 0` : `255, 255, 255`}, 1) 0%,
+    rgba(${({isDarkMode}) => isDarkMode ? `0, 0, 0` : `255, 255, 255`}, 0) 100%);
   }
 
   &:after {
     bottom: 0;
     background-image: linear-gradient(to bottom,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 1) 100%);
+    rgba(${({isDarkMode}) => isDarkMode ? `0, 0, 0` : `255, 255, 255`}, 0) 0%,
+    rgba(${({isDarkMode}) => isDarkMode ? `0, 0, 0` : `255, 255, 255`}, 1) 100%);
   }
 `;
 
-const TimePartWrapper = styled.div`
+interface TimePartWrapperProps {
+  isDarkMode: boolean;
+}
+
+const TimePartWrapper = styled.div<TimePartWrapperProps>`
   display: inline-block;
   margin-right: 50px;
   position: relative;
@@ -91,7 +93,7 @@ const TimePartWrapper = styled.div`
     position: absolute;
     top: 0;
     right: -30px;
-    color: rgba(255, 255, 255, 1);
+    color: ${({isDarkMode}) => isDarkMode ? "#FFFFFF" : "#000000"};
     font-size: 200px;
     line-height: 0.9;
   }
@@ -175,10 +177,15 @@ const TimePart = styled.div<TimePartProps>`
 
 const DigitWrapper = styled.div``;
 
-const Digit = styled.span`
+interface DigitProps {
+  isDarkMode: boolean;
+}
+
+const Digit = styled.span<DigitProps>`
   display: inline-block;
   font-size: 200px;
-  color: rgba(255, 255, 255, 1);
+  color: ${(props: DigitProps) =>
+          props.isDarkMode ? "rgba(255, 255, 255, 1)" : "rgba(0, 0, 0, 1)"};
   height: 180px;
   line-height: 1;
 `;
@@ -186,6 +193,8 @@ const Digit = styled.span`
 const endTime = new Date("2023.04.30 14:30:00");
 
 const Timer = () => {
+  const [isDarkMode, setIsDarkMode] = useAtom(isDarkModeAtom)
+
   const [hoursTensDelay, setHoursTensDelay] = useState(0);
   const [hoursOnesDelay, setHoursOnesDelay] = useState(0);
   const [minutesTensDelay, setMinutesTensDelay] = useState(0);
@@ -197,7 +206,7 @@ const Timer = () => {
 
   const renderDigits = (start: number, end: number) =>
     Array.from({length: end - start + 2}, (_, i) => (
-      <Digit key={i}>{start + i - 1}</Digit>
+      <Digit isDarkMode={isDarkMode} key={i}>{start + i - 1}</Digit>
     ));
 
 
@@ -232,13 +241,12 @@ const Timer = () => {
 
   return (
     <>
-      <GlobalStyle/>
-      <Wrapper>
+      <Wrapper isDarkMode={isDarkMode}>
         {isDone ? (
-          <Digit>--:--:--</Digit>
+          <Digit isDarkMode={isDarkMode}>--:--:--</Digit>
         ) : (
           <>
-            <TimePartWrapper>
+            <TimePartWrapper isDarkMode={isDarkMode}>
               <TimePart hoursTens hoursTensDelay={hoursTensDelay}>
                 <DigitWrapper className={"digit-wrapper"}>{renderDigits(0, 9)}</DigitWrapper>
               </TimePart>
@@ -247,7 +255,7 @@ const Timer = () => {
               </TimePart>
             </TimePartWrapper>
 
-            <TimePartWrapper>
+            <TimePartWrapper isDarkMode={isDarkMode}>
               <TimePart minutesTens minutesTensDelay={minutesTensDelay}
               >
                 <DigitWrapper className={"digit-wrapper"}>{renderDigits(0, 5)}</DigitWrapper>
@@ -258,7 +266,7 @@ const Timer = () => {
               </TimePart>
             </TimePartWrapper>
 
-            <TimePartWrapper>
+            <TimePartWrapper isDarkMode={isDarkMode}>
               <TimePart secondsTens secondsTensDelay={secondsTensDelay}
               >
                 <DigitWrapper className={"digit-wrapper"}>{renderDigits(0, 5)}</DigitWrapper>
