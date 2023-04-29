@@ -17,6 +17,10 @@ const GlobalStyle = createGlobalStyle`
     font-size: calc(10px + 2vmin);
     color: white;
   }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const AppHeader = styled.header`
