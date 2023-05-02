@@ -190,7 +190,7 @@ const Digit = styled.span<DigitProps>`
   line-height: 1;
 `;
 
-const endTime = new Date("2023.04.30 14:30:00");
+const endTime = new Date("2023.05.03 14:30:00");
 
 const Timer = () => {
   const [isDarkMode, setIsDarkMode] = useAtom(isDarkModeAtom)
