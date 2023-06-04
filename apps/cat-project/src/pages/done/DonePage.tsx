@@ -1,22 +1,22 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import MobileArea from "@/components/mobileArea/MobileArea";
 import { Button, Content, Flex, Input, Spacer, Text } from "@common/components";
 import localColorSet from "@/localColorSet";
-import { getFirestore, addDoc, collection} from "firebase/firestore";
-import {uuidAtom} from "../../../store";
-import {useAtom} from "jotai";
+import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { uuidAtom } from "../../../store";
+import { useAtom } from "jotai";
 
 const DonePage = () => {
   const [uuid] = useAtom(uuidAtom);
   const firestore = getFirestore();
   const [phone, setPhone] = useState("");
 
-
   const handleSubmitClick = async () => {
     await addDoc(collection(firestore, "phones"), {
       uuid: uuid,
       phone: phone,
     });
+  };
 
   const handleShareClick = () => {
     window.navigator.share({
