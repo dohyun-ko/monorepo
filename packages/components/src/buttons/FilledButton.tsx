@@ -19,6 +19,7 @@ const FilledButton = styled(Button)<FilledButtonProps>`
   }
 
   transition: transform ease-in 0.1s;
+
   &:active {
     transform: scale(0.95);
   }
