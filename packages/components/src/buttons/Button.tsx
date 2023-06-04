@@ -6,6 +6,7 @@ export interface ButtonProps {
   height?: string;
   border?: CSSProperties["border"];
   borderRadius?: CSSProperties["borderRadius"];
+  backgroundColor?: React.CSSProperties["backgroundColor"];
   disabled?: boolean;
 }
 
@@ -18,6 +19,7 @@ const Button = styled.button<ButtonProps>`
   border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : null)};
   background: none;
   pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
+  background-color: ${({ backgroundColor }) => backgroundColor ?? undefined};
 
   :hover {
     cursor: pointer;

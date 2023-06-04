@@ -9,7 +9,7 @@ export const colorSet = {
 };
 
 export const CONTENT_AREA_DESKTOP = "75%";
-export const CONTENT_AREA_MOBILE = "calc(100% - 40px)";
+export const CONTENT_AREA_MOBILE = "calc(100% - 50px)";
 
 export const fontFamily = {
   nanumSquareNeo: "nanum-square-neo, sans-serif",
