@@ -1,24 +1,31 @@
 #root {
-  font-family: "nanum-square-neo", sans-serif;
+    font-family: "nanum-square-neo", sans-serif;
 }
 
 
 /* nanum-square-neo */
 
 @font-face {
-  font-family: "nanum-square-neo";
-  font-weight: 700;
-  src: url("./assets/fonts/nanum-square-neo/NanumSquareNeoOTF-cBd.otf");
+    font-family: "nanum-square-neo";
+    font-weight: 700;
+    src: url("./assets/fonts/nanum-square-neo/NanumSquareNeoOTF-cBd.otf");
 }
 
 @font-face {
-  font-family: "nanum-square-neo";
-  font-weight: 800;
-  src: url("./assets/fonts/nanum-square-neo/NanumSquareNeoOTF-dEb.otf");
+    font-family: "nanum-square-neo";
+    font-weight: 800;
+    src: url("./assets/fonts/nanum-square-neo/NanumSquareNeoOTF-dEb.otf");
 }
 
 @font-face {
-  font-family: "nanum-square-neo";
-  font-weight: 900;
-  src: url("./assets/fonts/nanum-square-neo/NanumSquareNeoOTF-eHv.otf");
+    font-family: "nanum-square-neo";
+    font-weight: 900;
+    src: url("./assets/fonts/nanum-square-neo/NanumSquareNeoOTF-eHv.otf");
+}
+
+@font-face {
+    font-family: 'Goyang';
+    src: url('./assets/fonts/goyang/Goyang.otf');
+    font-weight: normal;
+    font-style: normal;
 }

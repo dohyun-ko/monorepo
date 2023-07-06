@@ -15,6 +15,7 @@ export const fontFamily = {
   nanumSquareNeo: "nanum-square-neo, sans-serif",
   notoSans: "noto-sans-kr, sans-serif",
   gongGothic: "GongGothicMedium, sans-serif",
+  goyang: "Goyang, sans-serif",
 };
 
 export type FontFamily = keyof typeof fontFamily;

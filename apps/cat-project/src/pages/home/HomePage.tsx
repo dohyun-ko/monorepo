@@ -2,27 +2,47 @@ import React, { useEffect, useState } from "react";
 import { Button, Content, Flex, Grid, Spacer, Text } from "@common/components";
 import MobileArea from "@/components/mobileArea/MobileArea";
 import localColorSet from "@/localColorSet";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { RoutePath } from "@/App";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
 import { useAtom } from "jotai";
 import { uuidAtom } from "../../../store";
+import banana from "../../assets/images/banana.webp";
+import Cat from "../../assets/images/cat.webp";
+import gimbab from "../../assets/images/gimbab.webp";
+import pen from "../../assets/images/pen.webp";
 
 const HomePage = () => {
   const [step, setStep] = useState(0);
   const [uuid, setUuid] = useAtom(uuidAtom);
+  const [searchParams] = useSearchParams();
 
   const navigate = useNavigate();
 
   const firestore = getFirestore();
 
   useEffect(() => {
-    if (uuid === "") {
-      setUuid(
-        Math.random().toString(36).substring(2, 15) +
-          Math.random().toString(36).substring(2, 15),
-      );
-    }
+    const handleUuid = async () => {
+      let localUuid = localStorage.getItem("uuid");
+
+      if (localUuid === "") {
+        localUuid =
+          Math.random().toString(36).substring(2, 15) +
+          Math.random().toString(36).substring(2, 15);
+
+        localStorage.setItem("uuid", localUuid);
+      }
+      setUuid(localUuid || "");
+
+      await addDoc(collection(firestore, "visit"), {
+        uuid: localUuid,
+        time: new Date().toLocaleString(),
+        utm_source: searchParams.get("utm_source") || "direct",
+        utm_medium: searchParams.get("utm_medium") || "direct",
+        utm_campaign: searchParams.get("utm_campaign") || "direct",
+      });
+    };
+    handleUuid();
   }, []);
 
   const handleNextClick = () => {
@@ -33,14 +53,14 @@ const HomePage = () => {
     await addDoc(collection(firestore, "results"), {
       uuid: uuid,
       result: item,
-      time: new Date().toUTCString(),
+      time: new Date().toLocaleString(),
     });
 
     navigate(RoutePath.DONE);
   };
 
   return (
-    <MobileArea>
+    <MobileArea backgroundColor={"rgb(237, 237, 237)"}>
       <Spacer />
 
       <Content>
@@ -70,43 +90,31 @@ const HomePage = () => {
             </Button>
           </Flex>
         ) : (
-          <Grid gridTemplateColumns={"1fr 1fr"} gap={"20px"}>
-            <Button
-              borderRadius={"15px"}
-              style={{
-                aspectRatio: "1/1",
-              }}
+          <Grid
+            gridTemplateColumns={"1fr 1fr"}
+            gridTemplateRows={"1fr 1fr"}
+            gap={"20px"}
+          >
+            <ItemButton
+              itemName={"바나나맛 우유"}
+              itemImage={banana}
               onClick={() => handleItemClick("바나나맛 우유")}
-            >
-              바나나맛 우유
-            </Button>
-            <Button
-              borderRadius={"15px"}
-              style={{
-                aspectRatio: "1/1",
-              }}
-              onClick={() => handleItemClick("삼각김밥")}
-            >
-              삼각김밥
-            </Button>
-            <Button
-              borderRadius={"15px"}
-              style={{
-                aspectRatio: "1/1",
-              }}
+            />
+            <ItemButton
+              itemName={"삼각김밥"}
+              itemImage={gimbab}
+              onClick={() => handleItemClick("삼각김밤")}
+            />
+            <ItemButton
+              itemName={"삼색볼펜"}
+              itemImage={pen}
               onClick={() => handleItemClick("삼색볼펜")}
-            >
-              삼색볼펜
-            </Button>
-            <Button
-              borderRadius={"15px"}
-              style={{
-                aspectRatio: "1/1",
-              }}
-              onClick={() => handleItemClick("고양이사진 20장")}
-            >
-              고양이사진 20장
-            </Button>
+            />
+            <ItemButton
+              itemName={"고양이 사진 20장"}
+              itemImage={Cat}
+              onClick={() => handleItemClick("고양이 사진 20장")}
+            />
           </Grid>
         )}
         <Spacer height={"20px"} />
@@ -116,3 +124,38 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
+interface ItemButtonProps {
+  itemName: string;
+  itemImage: string;
+  onClick: () => void;
+}
+
+const ItemButton = ({ itemName, itemImage, onClick }: ItemButtonProps) => {
+  return (
+    <Button borderRadius={"15px"} onClick={onClick}>
+      <Flex
+        flexDirection={"column"}
+        alignItems={"center"}
+        gap={"20px"}
+        style={{
+          backgroundColor: "#F5F5F5",
+          borderRadius: "10%",
+          padding: "10px 0",
+          height: "calc(100% - 20px)",
+        }}
+      >
+        <Flex
+          justifyContent={"center"}
+          alignItems={"center"}
+          style={{
+            flex: "1 1 0",
+          }}
+        >
+          <img src={itemImage} alt={itemName} width={"50%"} />
+        </Flex>
+        <Text>{itemName}</Text>
+      </Flex>
+    </Button>
+  );
+};
